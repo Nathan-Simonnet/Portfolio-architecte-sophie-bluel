@@ -1,115 +1,84 @@
-console.log("Read only")
+console.log("Read only");
 
-sessionStorage.clear()
+//// Ready to be filled with the GET works result
+let works = [];
+
+//// Images DOM displayer
+const allWorkInjection = (array) => {
+
+    while (gallery.firstChild) {
+        gallery.removeChild(gallery.firstChild);
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        const figure = document.createElement('figure');
+
+        // Create image element
+        const image = document.createElement('img');
+        image.src = array[i].imageUrl;
+        image.alt = array[i].title;
+
+        const figcaption = document.createElement('figcaption');
+        figcaption.textContent = array[i].title;
+        figure.appendChild(image);
+        figure.appendChild(figcaption);
+        gallery.appendChild(figure);
+    }
+
+};
+
+////Fetches handler
 const baseUrl = "http://localhost:5678/api/";
-let token;
-let works;
-let laImage;
 
-const workDeleter = (id) => {
-
-    const parameters =
-    {
-        method: 'DELETE',
-        headers: {
-            'accept': '*/*',
-            'Authorization': `Bearer ${sessionStorage['token']}`
-        },
-    }
-
-    fetch(baseUrl + 'works/' + id, parameters)
+// Launched by workFetcher
+const categoriesFetcher = () => {
+    console.log("Fetching " + baseUrl + 'categories')
+    fetch(baseUrl + 'categories')
         .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
+        .then((data) => console.log("Succes:", data))
         .catch((error) => console.log(error))
+};
 
-}
-
-deleteLast.addEventListener('click', () => {
-    workDeleter(works[works.length - 1].id)
-});
-const workPoster = (img, title, cat) => {
-    console.log(img, title, cat)
-    const formData = new FormData();
-    formData.append('image', img);
-    formData.append('title', title);
-    formData.append('category', cat);
-    console.log(formData)
-    console.log(sessionStorage.getItem("token"))
-
-    const parameters =
-    {
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'Authorization': `Bearer ${sessionStorage['token']}`
-        },
-        body: formData
-    }
-
-    fetch(baseUrl + 'works', parameters)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((error) => console.log(error))
-}
-
-const fileUploaderTest = document.getElementById('fileUploaderTest')
-fileUploaderTest.addEventListener('input', (e) => {
-    const file = e.target.files[0];
-    workPoster(file, "letitre", 2)
-
-});
-
+// Launched everytime the page is refresh
 const worksFetcher = () => {
+    console.log("Fetching " + baseUrl + 'works')
     fetch(baseUrl + 'works')
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
+            console.log("Succes:", data)
             works = data;
-        })
-        .catch((error) => console.log(error))
-}
-
-const categoriesFetcher = () => {
-    fetch(baseUrl + 'categories')
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            worksFetcher();
-        })
-        .catch((error) => console.log(error))
-}
-
-const loginPoster = () => {
-    const parameters =
-    {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-            'accept': 'application/json'
-        },
-        body: JSON.stringify({
-            email: "sophie.bluel@test.tld",
-            password: "S0phie"
-        })
-    }
-
-    fetch(baseUrl + 'users/login', parameters)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            sessionStorage.setItem('token', data.token);
+            allWorkInjection(data);
             categoriesFetcher();
+            // An error message is hidden at the bottom of the filter 
+            document.getElementById('connexion-pb').classList.remove('active')
         })
-        .catch((error) => console.log(error))
-}
+        .catch((error) => {
+            console.log(error)
+            // An error message appear at the bottom of the filter 
+            document.getElementById('connexion-pb').classList.add('active')
+        })
+}; worksFetcher();
 
-loginPoster()
-
+//// Buttons handler
+document.querySelectorAll('.filter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        if (btn.dataset.filter == "all") {
+            allWorkInjection(works)
+        } else if (btn.dataset.filter == "objects") {
+            allWorkInjection(
+                works.filter((work) => work.categoryId == 1)
+            )
+        } else if (btn.dataset.filter == "appartments") {
+            allWorkInjection(
+                works.filter((work) => work.categoryId == 2)
+            )
+        } else if (btn.dataset.filter == "accomodations") {
+            allWorkInjection(
+                works.filter((work) => work.categoryId == 3)
+            )
+        }
+    });
+});
 
 
 
