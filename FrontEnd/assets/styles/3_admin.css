@@ -1,0 +1,8 @@
+@import '1_global.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid red;
+}

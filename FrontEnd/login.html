@@ -14,6 +14,12 @@
 </head>
 
 <body>
+    <script>
+        if (sessionStorage.getItem('token')) {
+            window.location.href = "admin-mode.html";
+        }
+    </script>
+
     <div class="yellow-background">
         <header>
             <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -31,9 +37,9 @@
                 <h2 id="easter">Log in</h2>
                 <form action="#" method="post">
                     <label for="email">E-mail</label>
-                    <input type="text" name="email" id="email">
+                    <input type="text" name="email" id="email" required>
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" required>
                     <span id="userNotFoundReveal">Erreur dans l’identifiant ou le mot de passe</span>
                     <span id="errorOnLoginReveal">La tentative de connexion au serveur a échoué... Vérifiez votre
                         connexion, actualisez la page ou réessayez plus tard.</span>
