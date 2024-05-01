@@ -1,0 +1,100 @@
+@import '1_global.css';
+
+body {
+    /* So the footer stay at the bottom */
+    height: 100vh;
+}
+
+li {
+    font-family: "Work Sans", sans-serif;
+}
+
+.yellow-background {
+    width: 100%;
+}
+
+header {
+    width: 100%;
+}
+
+main {
+    width: 100%;
+}
+
+.login-container {
+    width: 230.688rem;
+}
+
+.login-container {
+    width: 50%;
+    margin: auto;
+}
+
+.login-container {
+    text-align: center;
+}
+
+.login-container form {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container input {
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.login-container label {
+    margin: 2em 0 1em 0;
+}
+
+#errorOnLoginReveal,
+#userNotFoundReveal {
+    color: red;
+    margin: 12px 0;
+    display: none;
+}
+
+/* Injected by JS */
+#errorOnLoginReveal.active,
+#userNotFoundReveal.active {
+    display: block;
+}
+
+input {
+    padding: 6px;
+}
+
+.btn-and-link-container {
+    margin-top: 38px;
+    gap: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-btn {
+    width: 11.188rem;
+    font-size: 0.875rem;
+    background: #1D6154;
+    border: none;
+    color: white;
+}
+
+.login-btn:hover {
+    background: #0E2F28;
+}
+
+.password-link {
+    font-size: 0.875rem;
+    color: black;
+}
+
+footer {
+    width: 100%;
+    margin-top: auto;
+}

@@ -1,17 +1,60 @@
-<!DOCTYPE html>
-<html lang='en'>
-
 <head>
-    <meta charset='UTF-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='assets/styles/1_global.css'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=Work+Sans&amp;display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/2_login.css">
     <title></title>
 </head>
 
 <body>
-    <h1>login</h1>
-    <!-- <script src='assets/js/login.js'></script> -->
+    <div class="yellow-background">
+        <header>
+            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+            <nav>
+                <ul>
+                    <li>projets</li>
+                    <li>contact</li>
+                    <li>login</li>
+                    <li><img src="assets/icons/instagram.png" alt="Instagram"></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="login-container">
+                <h2 id="easter">Log in</h2>
+                <form action="#" method="post">
+                    <label for="email">E-mail</label>
+                    <input type="text" name="email" id="email">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password">
+                    <span id="userNotFoundReveal">Erreur dans l’identifiant ou le mot de passe</span>
+                    <span id="errorOnLoginReveal">La tentative de connexion au serveur a échoué... Vérifiez votre
+                        connexion, actualisez la page ou réessayez plus tard.</span>
+                    <div class="btn-and-link-container">
+                        <button class="btn login-btn" id="login-btn">Se connecter</button>
+                        <a href="#" target="_blank" class="password-link">Mot de passe oublié</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <nav>
+            <ul>
+                <li class="legal-notices">Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="assets/js/login.js"></script>
 </body>
 
 </html>
