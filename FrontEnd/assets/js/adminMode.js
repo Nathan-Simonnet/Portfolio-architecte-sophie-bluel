@@ -3,19 +3,35 @@ console.log('admin')
 // Decryption of the token
 const decryption = (token) => {
 
-    console.log(token)
+    console.log(token);
     let tokenArray = [...token];
-    let result = ""
+    let decryptedToken = "";
 
     for (let i = 0; i < tokenArray.length - 1; i++) {
-        result += [token[i + 1]]
-        result += [token[i]]
+        decryptedToken += [token[i + 1]];
+        decryptedToken += [token[i]];
         i++;
-    }
+    };
 
     if (tokenArray.length % 2 != 0) {
-        result += tokenArray[tokenArray.length - 1]
-    }
+        decryptedToken += tokenArray[tokenArray.length - 1];
+    };
 
-    console.log(result)
-}; decryption(sessionStorage.getItem('token'));
+    return decryptedToken;
+}; // decryption(sessionStorage.getItem('token'));
+
+// DOM injections
+
+
+// Fetched handler
+
+
+// Modals handler
+const modalOuter = document.getElementById('modal-outer');
+const modalInner = document.getElementById('modal-inner');
+
+
+// Contact form handler
+document.getElementById('form-contact').addEventListener('submit', (e) => {
+    e.preventDefault();
+});

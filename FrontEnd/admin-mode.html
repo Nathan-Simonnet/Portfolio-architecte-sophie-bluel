@@ -1,18 +1,161 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="fr">
 
 <head>
-    <meta charset='UTF-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='assets/styles/3_admin.css'>
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles/3_admin-mode.css">
 </head>
+<!-- Credentials checker -->
+<script>
+    if (!sessionStorage.getItem('token')) { window.location.href = "login.html"; } 
+</script>
 
 <body>
-    <h1>admin</h1>
+    <div class="edit-mode-banner">
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p>Mode édition</p>
+    </div>
+    <div class="yellow-background">
+        <header>
+            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+            <nav>
+                <ul>
+                    <a href="#gallery">
+                        <li>projets</li>
+                    </a>
+                    <a href="#contact">
+                        <li>contact</li>
+                    </a>
+                    <a href="index.html">
+                        <li>logout</li>
+                    </a>
+                    <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="introduction">
+                <figure>
+                    <img src="./assets/images/sophie-bluel.png" alt="">
+                </figure>
+                <article>
+                    <h2>Designer d'espace</h2>
+                    <p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+                        livraison
+                        finale du chantier.</p>
+                    <p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+                        couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+                        chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+                    <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+                        décorateur(trice)</p>
+                </article>
+            </section>
+            <section id="portfolio">
+                <div class="portfolio-title-container">
+                    <h2>Mes Projets</h2>
+                    <div id="portfolio-edit-mode">
+                        <p><i class="fa-regular fa-pen-to-square"></i>modifier</p>
+                    </div>
+                </div>
+                <p id="connexion-pb">Tentative de connexion au serveur en
+                    cours. Si ce message persiste, vérifiez votre connexion, actualisez la page ou réessayez plus
+                    tard.
+                </p>
+                <!-- ==================================== MODAL outer layer start ====================================-->
 
-    <script src='assets/js/adminMode.js'></script>
+                <dialog id="modal-outer" class="modal">
+                    <div class="modal-close-btn-container">
+                        <i class="fa-solid fa-xmark modal-close" id="modal-outer-close"></i>
+                    </div>
+                    <h3>Galerie photo</h3>
+                    <div class="modal-outer-gallery-container modal-div outer" id="modal-outer-gallery-container">
+                    </div>
+                    <p class="modal-bar"></p>
+
+                    <button id="modal-inner-open" class="btn modal-btn">Ajoutez une photo</button>
+                </dialog>
+                <!-- ==================================== MODAL outer layer end====================================-->
+                <!--------------------------------- MODAL inner layer start --------------------------------->
+                <dialog id="modal-inner" class="modal">
+                    <div class="modal-close-btn-container inner">
+                        <i class="fa-solid fa-arrow-left modal-close" id="modal-inner-close"></i>
+                        <i class="fa-solid fa-xmark modal-close" id="modal-inner-and-outer-close"></i>
+                    </div>
+                    <h3>Ajout photo</h3>
+                    <form id="modal-inner-file-uploader">
+                        <div class="file-uploader-container modal-div inner" id="empty">
+                            <div class="file-uploader-img-and-placeholder-container">
+                                <div id="file-uploader-img-container"></div>
+                                <i class="fa-regular fa-image file-uploader-placeholder"
+                                    id="file-uploader-placeholder"></i>
+                            </div>
+                            <label for="file-uploader-input" class="file-uploader-label" id="file-uploader-label">+
+                                Ajouter photo</label>
+                            <input type="file" id="file-uploader-input" class="file-uploader-input"
+                                accept="image/jpeg,image/jpg,image/png,image/webp" required>
+                            <p id="file-uploader-format">jpg, png : 4mo max</p>
+                        </div>
+                        <div class="file-uploader-container modal-div inner" id="filled">
+                        </div>
+                        <div class="modal-div inner">
+                            <div class="modal-div file-title-container"><label
+                                    for="modal-inner-form-file-title">Titre</label>
+                                <input type="text" id="modal-inner-form-file-title" required>
+                            </div>
+                        </div>
+                        <div class="modal-div inner">
+                            <div class="modal-div file-category-container"><label
+                                    for="modal-inner-form-file-category">Catégorie</label>
+                                <select id="modal-inner-form-file-category" name="file-category" required>
+                                    <option value=""></option>
+                                    <option value="1">Objets</option>
+                                    <option value="2">Appartements</option>
+                                    <option value="3">Hotels & restaurants</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="modal-bar inner"></p>
+                        <button id="file-uploader-btn-submit" class="btn modal-btn inner">Valider</button>
+                    </form>
+                </dialog>
+                <!--------------------------------- MODAL inner layer end --------------------------------->
+                <p id="connexion-pb">Tentative de connexion au serveur en
+                    cours. Si ce message persiste, vérifiez votre connexion, actualisez la page ou réessayez plus tard.
+                </p>
+                <div class="gallery" id="gallery">
+                </div>
+            </section>
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>Vous avez un projet ? Discutons-en !</p>
+                <form action="#" method="post" id="form-contact">
+                    <label for="name">Nom</label>
+                    <input type="text" name="name" id="name">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Envoyer" id="submit">
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <nav>
+            <ul>
+                <li class="legal-notices">Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="assets/js/adminMode.js"></script>
 </body>
 
 </html>
