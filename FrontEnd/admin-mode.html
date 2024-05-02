@@ -27,13 +27,13 @@
             <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
             <nav>
                 <ul>
-                    <a href="#gallery">
+                    <a href="#gallery" tabindex="1">
                         <li>projets</li>
                     </a>
-                    <a href="#contact">
+                    <a href="#contact" tabindex="2">
                         <li>contact</li>
                     </a>
-                    <a href="index.html">
+                    <a href="index.html" tabindex="3">
                         <li>logout</li>
                     </a>
                     <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -61,7 +61,7 @@
                 <div class="portfolio-title-container">
                     <h2>Mes Projets</h2>
                     <div id="portfolio-edit-mode">
-                        <p><i class="fa-regular fa-pen-to-square"></i>modifier</p>
+                        <p tabindex="4"><i class="fa-regular fa-pen-to-square"></i>modifier</p>
                     </div>
                 </div>
                 <p id="connexion-pb">Tentative de connexion au serveur en
@@ -72,7 +72,7 @@
 
                 <dialog id="modal-outer" class="modal">
                     <div class="modal-close-btn-container">
-                        <i class="fa-solid fa-xmark modal-close" id="modal-outer-close"></i>
+                        <i class="fa-solid fa-xmark modal-close" id="modal-outer-close" tabindex="1"></i>
                     </div>
                     <h3>Galerie photo</h3>
                     <div class="modal-outer-gallery-container modal-div outer" id="modal-outer-gallery-container">
@@ -85,8 +85,8 @@
                 <!--------------------------------- MODAL inner layer start --------------------------------->
                 <dialog id="modal-inner" class="modal">
                     <div class="modal-close-btn-container inner">
-                        <i class="fa-solid fa-arrow-left modal-close" id="modal-inner-close"></i>
-                        <i class="fa-solid fa-xmark modal-close" id="modal-inner-and-outer-close"></i>
+                        <i class="fa-solid fa-arrow-left modal-close" id="modal-inner-close" tabindex="1"></i>
+                        <i class="fa-solid fa-xmark modal-close" id="modal-inner-and-outer-close" tabindex="2"></i>
                     </div>
                     <h3>Ajout photo</h3>
                     <form id="modal-inner-file-uploader">
@@ -99,7 +99,7 @@
                             <label for="file-uploader-input" class="file-uploader-label" id="file-uploader-label">+
                                 Ajouter photo</label>
                             <input type="file" id="file-uploader-input" class="file-uploader-input"
-                                accept="image/jpeg,image/jpg,image/png,image/webp" required>
+                                accept="image/jpeg,image/jpg,image/png,image/webp" tabindex="3" required>
                             <p id="file-uploader-format">jpg, png : 4mo max</p>
                         </div>
                         <div class="file-uploader-container modal-div inner" id="filled">
