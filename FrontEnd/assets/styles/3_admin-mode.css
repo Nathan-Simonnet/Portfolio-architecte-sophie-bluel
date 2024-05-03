@@ -191,19 +191,22 @@ form {
     background: #E8F1F6;
     border-radius: 3px;
     border: 2px solid #ffffff00;
-    display: none;
 }
 
 .file-uploader-container.active {
     border: 2px solid black;
 }
 
-#filled {
+.file-uploader-container.hidden {
     display: none;
 }
 
-#filled img {
+.file-uploader-container img {
     max-height: 10.563rem;
+}
+
+.file-uploader-container figcaption {
+    display: none;
 }
 
 .file-uploader-placeholder-container {
