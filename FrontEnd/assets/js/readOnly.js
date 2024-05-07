@@ -50,12 +50,12 @@ const worksFetcher = () => {
             allWorkInjection(data);
             categoriesFetcher();
             // An error message is hidden at the bottom of the filter 
-            document.getElementById('connexion-pb').classList.remove('active')
+            document.querySelector('.connexion-pb').classList.remove('active')
         })
         .catch((error) => {
             console.log(error)
             // An error message appear at the bottom of the filter 
-            document.getElementById('connexion-pb').classList.add('active')
+            document.querySelector('.connexion-pb').classList.add('active')
         })
 }; worksFetcher();
 

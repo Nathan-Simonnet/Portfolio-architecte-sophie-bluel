@@ -131,13 +131,13 @@ const worksFetcher = () => {
             works = data;
             console.log(works);
             // An error message is hidden at the bottom of the filter 
-            document.getElementById('connexion-pb').classList.remove('active')
+            document.querySelector('.connexion-pb').classList.remove('active')
             if (firstConnection == true) { galleryImgInjection(data); firstConnection = false; }
         })
         .catch((error) => {
             console.log(error)
             // An error message appear at the bottom of the filter 
-            document.getElementById('connexion-pb').classList.add('active')
+            document.querySelector('.connexion-pb').classList.add('active')
         })
 }; worksFetcher();
 
@@ -216,6 +216,7 @@ const workPoster = (img, title, cat) => {
             };
             singleGalleryInjection(data);
             singleOuterModalImgInjection(data);
+            alert("Image ajoutée avec succès!");
         })
         .catch((error) => {
             console.log(error);

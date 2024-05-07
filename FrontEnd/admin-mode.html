@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,13 +10,14 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/3_admin-mode.css">
+    <title>Sophie Bluel - Admin mode</title>
 </head>
-<!-- Credentials checker -->
-<script>
-    if (!sessionStorage.getItem('token')) { window.location.href = "login.html"; } 
-</script>
 
 <body>
+    <!-- Credentials checker -->
+    <script>
+        if (!sessionStorage.getItem('token')) { window.location.href = "login.html"; } 
+    </script>
     <div class="edit-mode-banner">
         <i class="fa-regular fa-pen-to-square"></i>
         <p>Mode édition</p>
@@ -27,15 +27,9 @@
             <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
             <nav>
                 <ul>
-                    <a href="#gallery" tabindex="1">
-                        <li>projets</li>
-                    </a>
-                    <a href="#contact" tabindex="2">
-                        <li>contact</li>
-                    </a>
-                    <a href="index.html" tabindex="3">
-                        <li>logout</li>
-                    </a>
+                    <li><a href="#gallery" tabindex="1">projets</a></li>
+                    <li><a href="#contact" tabindex="2">contact</a></li>
+                    <li><a href="index.html" tabindex="3">logout</a></li>
                     <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
                 </ul>
             </nav>
@@ -64,11 +58,11 @@
                         <p tabindex="4"><i class="fa-regular fa-pen-to-square"></i>modifier</p>
                     </div>
                 </div>
-                <p id="connexion-pb">Tentative de connexion au serveur en
+                <p class="connexion-pb">Tentative de connexion au serveur en
                     cours. Si ce message persiste, vérifiez votre connexion, actualisez la page ou réessayez plus
                     tard.
                 </p>
-                <!-- ==================================== MODAL outer layer start ====================================-->
+                <!--  MODAL outer layer start -->
 
                 <dialog id="modal-outer" class="modal">
                     <div class="modal-close-btn-container">
@@ -81,8 +75,8 @@
 
                     <button id="modal-inner-open" class="btn modal-btn">Ajoutez une photo</button>
                 </dialog>
-                <!-- ==================================== MODAL outer layer end====================================-->
-                <!--------------------------------- MODAL inner layer start --------------------------------->
+                <!--  MODAL outer layer end -->
+                <!-- MODAL inner layer start -->
                 <dialog id="modal-inner" class="modal">
                     <div class="modal-close-btn-container inner">
                         <i class="fa-solid fa-arrow-left modal-close" id="modal-inner-close" tabindex="1"></i>
@@ -114,7 +108,7 @@
                             <div class="modal-div file-category-container"><label
                                     for="modal-inner-form-file-category">Catégorie</label>
                                 <select id="modal-inner-form-file-category" name="file-category" required>
-                                    <option value=""></option>
+                                    <option value="">Sélectionnez une catégorie</option>
                                     <option value="1">Objets</option>
                                     <option value="2">Appartements</option>
                                     <option value="3">Hotels & restaurants</option>
@@ -125,8 +119,8 @@
                         <button id="file-uploader-btn-submit" class="btn modal-btn inner">Valider</button>
                     </form>
                 </dialog>
-                <!--------------------------------- MODAL inner layer end --------------------------------->
-                <p id="connexion-pb">Tentative de connexion au serveur en
+                <!-- MODAL inner layer end -->
+                <p class="connexion-pb">Tentative de connexion au serveur en
                     cours. Si ce message persiste, vérifiez votre connexion, actualisez la page ou réessayez plus tard.
                 </p>
                 <div class="gallery" id="gallery">
