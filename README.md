@@ -1,7 +1,7 @@
 # Portfolio-architecte-sophie-bluel
 Code du projet 3 du parcours développeur web.
 ## Présentation
-![Image de Sophie Bluele et crtaines de ses créations](Readme-images/sophie-bluel.png)
+![Image de Sophie Bluele et crtaines de ses créations](FrontEnd\assets\images\sophie-bluel_thumbnail.png)
 
 ### Technos
 ![image](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
