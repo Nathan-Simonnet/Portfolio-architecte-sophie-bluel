@@ -13,11 +13,11 @@ Vous travaillez comme développeur front-end pour l’agence ArchiWebos qui comp
 Ayant terminé votre dernier projet avec un peu d'avance, vous êtes envoyé en renfort comme développeur front-end d’une équipe qui travaille sur la conception du site portfolio d’une architecte d’intérieur.
 
 ### Missions
-➣ Récupérer dynamiquement les données des travaux via l’API
-➣ Ajouter une option de tri des projets par catégorie dans la galerie
-➣ Intégrer la page de connexion pour le site
-➣ Ajouter une fenêtre modale pour gérer les projets
-➣ Créer le formulaire pour l’ajout de projet
++ Récupérer dynamiquement les données des travaux via l’API
++ Ajouter une option de tri des projets par catégorie dans la galerie
++ Intégrer la page de connexion pour le site
++ Ajouter une fenêtre modale pour gérer les projets
++ Créer le formulaire pour l’ajout de projet
 
 ## Utilisation
 ### Lancement du server
@@ -27,5 +27,5 @@ npm install
 npm start
 ```
 ### Front
-➣ <span style="color:red;">index.html</span> pour ouvrir la version "read only" du site.
-➣ <span style="color:red;">login.html</span> or <span style="color:red;">admin-mode.html</span> pour ouvrir la version administrateur et éditable du site.
++ <span style="color:red;">index.html</span> pour ouvrir la version "read only" du site.
++ <span style="color:red;">login.html</span> or <span style="color:red;">admin-mode.html</span> pour ouvrir la version administrateur et éditable du site.
