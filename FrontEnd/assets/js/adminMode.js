@@ -1,30 +1,11 @@
-console.log('admin')
+console.log('Admin mode')
 // True if workfetcher succed, and allow the rest of the page
 let connectionEstablished = false;
 // If yes, inject images into the gallery
 let firstConnection = true;
 // Ready to be filled with datas from GET works
 let works;
-
 //// Utility box
-// Decryption of the token stored
-const decryption = (token) => {
-
-    let tokenArray = [...token];
-    let decryptedToken = "";
-
-    for (let i = 0; i < tokenArray.length - 1; i++) {
-        decryptedToken += [token[i + 1]];
-        decryptedToken += [token[i]];
-        i++;
-    };
-
-    if (tokenArray.length % 2 != 0) {
-        decryptedToken += tokenArray[tokenArray.length - 1];
-    };
-
-    return decryptedToken;
-};
 // Empty any div with a loop, handy 
 const emptyThis = (id) => {
     const div = document.getElementById(id)
@@ -45,7 +26,6 @@ const resetFormInputsAndStyle = () => {
     // Background button submit green to grey
     document.getElementById('file-uploader-btn-submit').classList.remove("active")
 }
-
 //// DOM injections 
 // Home page injection
 const galleryImgInjection = (array) => {
@@ -98,13 +78,6 @@ const outerModalImgInjection = (array) => {
     // Buttons event
     document.querySelectorAll('.modal-outer-image-delete-logo-container').forEach((btn) => {
         btn.addEventListener('click', () => {
-            // Delete locally the image from the array
-            works = works.filter((work) => {
-                return work.id != btn.parentNode.dataset.imgId
-            })
-            // Inject the new array
-            outerModalImgInjection(works);
-            galleryImgInjection(works);
             // Fetch a delete request for the image 
             workDeleter(btn.parentNode.dataset.imgId)
         });
@@ -124,12 +97,12 @@ const baseUrl = "http://localhost:5678/api/";
 
 // GET works
 const worksFetcher = () => {
-    console.log('Trying to get ' + baseUrl + 'works')
+    console.log('Trying to GET works')
     fetch(baseUrl + 'works')
         .then((response) => response.json())
         .then((data) => {
             works = data;
-            console.log(works);
+            console.log('Succes:', works);
             // An error message is hidden at the bottom of the filter 
             document.querySelector('.connexion-pb').classList.remove('active')
             if (firstConnection == true) { galleryImgInjection(data); firstConnection = false; }
@@ -142,33 +115,44 @@ const worksFetcher = () => {
 }; worksFetcher();
 
 // Delete work + id
-const workDeleter = (id) => {
-    console.log('Trying to delete item id n°' + id)
+const workDeleter = (idTodelete) => {
+    console.log('Trying to DELETE item id n°' + idTodelete)
     const parameters =
     {
         method: 'DELETE',
         headers: {
             'accept': '*/*',
-            'Authorization': `Bearer ${decryption(sessionStorage['token'])}`
+            'Authorization': `Bearer ${sessionStorage['token']}`
         },
     }
 
-    fetch(baseUrl + 'works/' + id, parameters)
-        .then((response) => console.log('Succes:', response))
-        .catch((error) => console.log('Error', error))
+    fetch(baseUrl + 'works/' + idTodelete, parameters)
+        .then((response) => {
+            console.log('Succes:', response)
+            // Delete locally the image from the array
+            works = works.filter((work) => {
+                return work.id != idTodelete
+            })
+            // Inject the new array
+            outerModalImgInjection(works);
+            galleryImgInjection(works);
+        })
+        .catch((error) => {
+            console.log('Error', error)
+            alert("Nous n'arrivons pas à supprimer cette image... Si ce message persiste, vérifiez votre connexion, actualisez la page ou réessayez plus tard.")
+        })
 
 }
-
 // Post work 
 const workPoster = (img, title, cat) => {
-    console.log('Trying to post ' + title)
+    console.log('Trying to POST ' + title)
     const formData = new FormData();
     formData.append('image', img);
     formData.append('title', title);
     formData.append('category', cat);
 
     const parameters =
-        { method: 'POST', headers: { 'accept': 'application/json', 'Authorization': `Bearer ${decryption(sessionStorage['token'])}` }, body: formData }
+        { method: 'POST', headers: { 'accept': 'application/json', 'Authorization': `Bearer ${sessionStorage['token']}` }, body: formData }
 
     fetch(baseUrl + 'works', parameters)
         .then((response) => response.json())
@@ -212,7 +196,28 @@ const workPoster = (img, title, cat) => {
                 figure.appendChild(newDiv);
                 figure.appendChild(img);
                 document.getElementById('modal-outer-gallery-container').appendChild(figure);
-                console.log(img)
+                // Buttons event
+                document.querySelectorAll('.modal-outer-image-delete-logo-container').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        // Delete locally the image from the array
+                        works = works.filter((work) => {
+                            return work.id != btn.parentNode.dataset.imgId
+                        })
+                        // Inject the new array
+                        outerModalImgInjection(works);
+                        galleryImgInjection(works);
+                        // Fetch a delete request for the image 
+                        workDeleter(btn.parentNode.dataset.imgId)
+                    });
+                    // For keyboard user
+                    btn.addEventListener('keydown', (e) => {
+                        // Check if the pressed key is Enter (keycode 13)
+                        if (e.key === 'Enter') {
+                            // Execute the button's click event
+                            e.target.click();
+                        }
+                    });
+                });
             };
             singleGalleryInjection(data);
             singleOuterModalImgInjection(data);
@@ -223,13 +228,11 @@ const workPoster = (img, title, cat) => {
             alert("Nous n'arrivons pas à poster cette image... Si ce message persiste, vérifiez votre connexion, actualisez la page ou réessayez plus tard.");
         })
 }
-
 //// Modals handler
 const modalOuter = document.getElementById('modal-outer');
 const modalInner = document.getElementById('modal-inner');
 // Prevent some events to be duplicated
 let innerModalEventsAlreadyLoaded = false;
-
 // Inner modal events handler
 const innerModalHandler = () => {
     modalInner.showModal();
@@ -334,8 +337,19 @@ document.getElementById('portfolio-edit-mode').addEventListener('click', () => {
 document.getElementById('portfolio-edit-mode').addEventListener('keydown', (e) => {
     e.key === 'Enter' ? outerModalHandler() : null;
 });
-
+// Logout handler
+// Clear sessionStorage
+logout.addEventListener('click', () => {
+    sessionStorage.token = "";
+});
 // Contact form handler
 document.getElementById('form-contact').addEventListener('submit', (e) => {
     e.preventDefault();
 });
+
+
+
+
+
+// Decryption of the token stored
+// const decryption = (token) => {let tokenArray = [...token];let decryptedToken = "";for (let i = 0; i < tokenArray.length - 1; i++){decryptedToken += [token[i + 1]];decryptedToken += [token[i]];i++;};if (tokenArray.length % 2 != 0) {decryptedToken += tokenArray[tokenArray.length - 1];};return decryptedToken;};

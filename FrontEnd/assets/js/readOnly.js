@@ -32,7 +32,7 @@ const baseUrl = "http://localhost:5678/api/";
 
 // Launched by workFetcher
 const categoriesFetcher = () => {
-    console.log("Fetching " + baseUrl + 'categories')
+    console.log('Trying to GET categories')
     fetch(baseUrl + 'categories')
         .then((response) => response.json())
         .then((data) => console.log("Succes:", data))
@@ -41,7 +41,9 @@ const categoriesFetcher = () => {
 
 // Launched everytime the page is refresh
 const worksFetcher = () => {
-    console.log("Fetching " + baseUrl + 'works')
+    // An error message is hidden at the bottom of the filter 
+    document.querySelector('.connexion-pb').classList.remove('active')
+    console.log("Trying to GET works")
     fetch(baseUrl + 'works')
         .then((response) => response.json())
         .then((data) => {
@@ -49,8 +51,6 @@ const worksFetcher = () => {
             works = data;
             allWorkInjection(data);
             categoriesFetcher();
-            // An error message is hidden at the bottom of the filter 
-            document.querySelector('.connexion-pb').classList.remove('active')
         })
         .catch((error) => {
             console.log(error)
