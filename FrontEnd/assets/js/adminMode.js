@@ -45,9 +45,7 @@ const galleryImgInjection = (array) => {
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
     }
-
 };
-
 // Outer modal injection
 const outerModalImgInjection = (array) => {
     const outerModalGallery = document.getElementById('modal-outer-gallery-container');
@@ -105,7 +103,10 @@ const worksFetcher = () => {
             console.log('Succes:', works);
             // An error message is hidden at the bottom of the filter 
             document.querySelector('.connexion-pb').classList.remove('active')
-            if (firstConnection == true) { galleryImgInjection(data); firstConnection = false; }
+            if (firstConnection == true) {
+                galleryImgInjection(data);
+                firstConnection = false;
+            }
         })
         .catch((error) => {
             console.log(error)

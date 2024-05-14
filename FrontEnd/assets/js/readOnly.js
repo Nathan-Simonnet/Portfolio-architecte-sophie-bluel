@@ -12,19 +12,15 @@ const allWorkInjection = (array) => {
 
     for (let i = 0; i < array.length; i++) {
         const figure = document.createElement('figure');
-
-        // Create image element
         const image = document.createElement('img');
         image.src = array[i].imageUrl;
         image.alt = array[i].title;
-
         const figcaption = document.createElement('figcaption');
         figcaption.textContent = array[i].title;
         figure.appendChild(image);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
     }
-
 };
 
 ////Fetches handler
